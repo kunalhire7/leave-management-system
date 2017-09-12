@@ -1,0 +1,25 @@
+{
+  "name": "leave-management-system",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1",
+    "prop-types": "^15.5.10",
+    "react-redux": "^5.0.5",
+    "redux": "^3.5.2",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.1.0"
+  },
+  "devDependencies": {
+    "enzyme": "^2.8.2",
+    "react-scripts": "1.0.13",
+    "react-test-renderer": "^15.6.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
