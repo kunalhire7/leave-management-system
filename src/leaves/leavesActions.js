@@ -2,6 +2,7 @@ import http, {
     config,
     APPLICATION_JSON
 } from "../api/http";
+import { push } from 'react-router-redux'
 
 const leaveFetching = (leaveId) => ({
     type: constants.LEAVE_FETCHING,
@@ -50,16 +51,44 @@ const submitLeave = (leave) => {
     }
 };
 
+const leavesFetched = (leaves) => ({
+    type: constants.LEAVES_FETCHED,
+    leaves
+});
+
+const fetchLeaves = () => {
+    return (dispatch) => {
+        dispatch(leaveFetching());
+        return http.get(dispatch, `${config.serverUrl}/leaves`, null, {
+            'Accept': APPLICATION_JSON
+        }).then((resp) => {
+            dispatch(leavesFetched(resp));
+            return resp
+        }).catch((err) => {
+            dispatch(leaveError(`Unable to retrieve the leaves: ${err.status} (${err.statusText})`))
+        })
+    }
+};
+
+const navigateToNewLeave = () => {
+    return (dispatch) => {
+        dispatch(push("new"))
+    }
+};
+
 export const constants = {
     LEAVE_ERROR: "LEAVE_ERROR",
     LEAVE_NEW: "LEAVE_NEW",
     LEAVE_SAVING: "LEAVE_SAVING",
     LEAVE_SAVED: "LEAVE_SAVED",
     LEAVE_FETCHING: "LEAVE_FETCHING",
-    LEAVE_FETCHED: "LEAVE_FETCHED"
+    LEAVE_FETCHED: "LEAVE_FETCHED",
+    LEAVES_FETCHED: "LEAVES_FETCHED"
 };
 
 export const leavesActions = {
     fetchLeave,
-    submitLeave
+    submitLeave,
+    fetchLeaves,
+    navigateToNewLeave
 };

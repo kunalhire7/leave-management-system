@@ -13,7 +13,7 @@ export default function leaves(state = initialState, action = {}) {
             });
         case constants.LEAVE_NEW:
             return Object.assign({}, state, {
-                offer: action.offer,
+                leave: action.leave,
                 status: "SUCCESS",
                 error: null,
                 locations: [],
@@ -22,7 +22,13 @@ export default function leaves(state = initialState, action = {}) {
         case constants.LEAVE_SAVED:
         case constants.LEAVE_FETCHED:
             return Object.assign({}, state, {
-                offer: action.leave,
+                leave: action.leave,
+                status: "SUCCESS",
+                error: null
+            });
+        case constants.LEAVES_FETCHED:
+            return Object.assign({}, state, {
+                leaves: action.leaves,
                 status: "SUCCESS",
                 error: null
             });
