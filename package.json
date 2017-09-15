@@ -5,6 +5,7 @@
   "dependencies": {
     "history": "^4.7.2",
     "isomorphic-fetch": "^2.2.1",
+    "moment": "^2.18.1",
     "prop-types": "^15.5.10",
     "qs": "^6.5.1",
     "react": "^15.6.1",

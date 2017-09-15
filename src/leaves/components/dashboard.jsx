@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Panel, Table, Button } from 'react-bootstrap';
+import { Panel, Table, Button, Row, FormGroup } from 'react-bootstrap';
+const moment = require('moment');
 
 export default class Dashboard extends Component {
 
@@ -33,11 +34,13 @@ export default class Dashboard extends Component {
 
         if(this.props.leaves) {
             rows = this.props.leaves.map((row, index) => {
+                let fromDate = moment(row.fromDate);
+                let toDate = moment(row.toDate);
                 return <tr>
                             <td>{index + 1}</td>
-                            <td>{row.fromDate}</td>
-                            <td>{row.toDate}</td>
-                            <td>{row.toDate - row.fromDate}</td>
+                            <td>{fromDate.format("Do MMM YY")}</td>
+                            <td>{toDate.format("Do MMM YY")}</td>
+                            <td>{toDate.diff(fromDate, "days") + 1}</td>
                             <td>{row.reason}</td>
                             <td>{row.type}</td>
                             <td>Pending Approval</td>
@@ -47,15 +50,23 @@ export default class Dashboard extends Component {
 
         return (
             <div className="container">
-                <Button allign="right" bsStyle="info" onClick={(e) => this.newLeave(e)}>New Leave</Button>
-                <Panel header="My Leaves">
-                    <Table>
-                        {this.getTableHeaders()}
-                        <tbody>
-                            {rows}
-                        </tbody>
-                    </Table>
-                </Panel>
+                <FormGroup>
+                    <Row>
+                        <Button bsStyle="info" className="pull-right" onClick={(e) => this.newLeave(e)}>New Leave</Button>
+                    </Row>
+                </FormGroup>
+                <FormGroup>
+                    <Row>
+                        <Panel header="My Leaves">
+                            <Table>
+                                {this.getTableHeaders()}
+                                <tbody>
+                                    {rows}
+                                </tbody>
+                            </Table>
+                        </Panel>
+                    </Row>
+                </FormGroup>
             </div>
         )
     }

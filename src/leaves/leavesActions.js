@@ -44,6 +44,7 @@ const submitLeave = (leave) => {
             'Accept': APPLICATION_JSON
         }).then((resp) => {
             dispatch(leaveSubmitted(resp));
+            dispatch(leavesActions.navigateToDashboard());
             return resp
         }).catch((err) => {
             dispatch(leaveError(`Unable to submit the leave: ${err.status} (${err.statusText})`))
@@ -76,6 +77,12 @@ const navigateToNewLeave = () => {
     }
 };
 
+const navigateToDashboard = () => {
+    return (dispatch) => {
+        dispatch(push("/"))
+    }
+};
+
 export const constants = {
     LEAVE_ERROR: "LEAVE_ERROR",
     LEAVE_NEW: "LEAVE_NEW",
@@ -90,5 +97,6 @@ export const leavesActions = {
     fetchLeave,
     submitLeave,
     fetchLeaves,
-    navigateToNewLeave
+    navigateToNewLeave,
+    navigateToDashboard
 };
