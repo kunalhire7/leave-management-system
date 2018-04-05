@@ -1,7 +1,6 @@
 import React from "react";
 import {expect} from "chai";
 import {shallow} from "enzyme";
-import sinon from "sinon";
 import {Provider} from "react-redux";
 import thunk from 'redux-thunk';
 import configureStore from "redux-mock-store";

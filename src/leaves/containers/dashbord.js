@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 import { leavesActions } from '../leavesActions.js';
 import Dashboard from '../components/dashboard';
 
-const mapDispatchToProps = (dispatch, ownProps) => {
+const mapDispatchToProps = (dispatch) => {
     return {
         fetchLeaves: () => {
             dispatch(leavesActions.fetchLeaves())
