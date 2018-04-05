@@ -9,6 +9,7 @@ const mapDispatchToProps = (dispatch, ownProps) => {
             dispatch(leavesActions.fetchLeave(ownProps.params.leaveId))
         },
         submitLeave: (leave) => {
+            console.log(leave);
             dispatch(leavesActions.submitLeave(leave))
         }
     };

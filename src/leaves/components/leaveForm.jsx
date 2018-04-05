@@ -6,33 +6,28 @@ export default class LeaveForm extends Component {
 
     constructor() {
         super();
-        this.leave = {};
+        this.state = {};
     }
 
     onFromDateChanged(e) {
-        console.log("From Date::", new Date(e.target.value));
-        this.leave.fromDate = new Date(e.target.value);
+        this.setState({fromDate: new Date(e.target.value)});
     }
 
     onToDateChanged(e) {
-        console.log("To Date::", new Date(e.target.value));
-        this.leave.toDate = new Date(e.target.value);
+        this.setState({toDate: new Date(e.target.value)});
     }
 
     onReasonChanged(e) {
-        console.log("Reason::", e.target.value);
-        this.leave.reason = e.target.value;
+        this.setState({reason: e.target.value});
     }
 
     onTypeChanges(e) {
-        console.log("Type::", e.target.value);
-        this.leave.type = e.target.value;
+        this.setState({type: e.target.value});
     }
 
     onFormSubmit(e) {
         e.preventDefault();
-        console.log("Form submitted::", this.leave);
-        this.props.submitLeave(this.leave);
+        this.props.submitLeave(this.state);
     }
 
     render() {
@@ -68,7 +63,7 @@ export default class LeaveForm extends Component {
                         </FormControl>
                     </FormGroup>
 
-                    <Button bsStyle="primary" type="submit" onClick={(e) => this.onFormSubmit(e)}>
+                    <Button id="submitBtn" bsStyle="primary" type="submit" onClick={(e) => this.onFormSubmit(e)}>
                         Submit
                     </Button>
                 </form>
