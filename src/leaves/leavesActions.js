@@ -52,25 +52,6 @@ const submitLeave = (leave) => {
     }
 };
 
-const leavesFetched = (leaves) => ({
-    type: constants.LEAVES_FETCHED,
-    leaves
-});
-
-const fetchLeaves = () => {
-    return (dispatch) => {
-        dispatch(leaveFetching());
-        return http.get(dispatch, `${config.serverUrl}/leaves`, null, {
-            'Accept': APPLICATION_JSON
-        }).then((resp) => {
-            dispatch(leavesFetched(resp));
-            return resp
-        }).catch((err) => {
-            dispatch(leaveError(`Unable to retrieve the leaves: ${err.status} (${err.statusText})`))
-        })
-    }
-};
-
 const navigateToNewLeave = () => {
     return (dispatch) => {
         dispatch(push("new"))
@@ -96,7 +77,6 @@ export const constants = {
 export const leavesActions = {
     fetchLeave,
     submitLeave,
-    fetchLeaves,
     navigateToNewLeave,
     navigateToDashboard
 };

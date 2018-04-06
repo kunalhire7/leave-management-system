@@ -26,15 +26,6 @@ describe("Leaves Reducer", () => {
         expect(updatedState.leave).deep.equal(leave);
     });
 
-    it("should return a new state with status LOADING when a LEAVES_FETCHED action is received", () => {
-        let leave = {dummy: 'dummy'};
-        const action = {type: constants.LEAVES_FETCHED, leaves: [leave]};
-
-        const updatedState = reducer(undefined, action);
-
-        expect(updatedState.leaves).deep.equal([leave]);
-    });
-
     it("should return a new state with status LOADING when a LEAVE_ERROR action is received", () => {
         let error = {error: 'dummy'};
         const action = {type: constants.LEAVE_ERROR, error: error};

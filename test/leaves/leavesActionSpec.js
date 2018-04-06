@@ -59,37 +59,6 @@ describe("Leaves Action", () => {
             .catch(done);
     });
 
-    it("should dispatch correct action when fetchLeaves is called", (done) => {
-        const request = api.get(`/leaves`).reply(200, [leaveFormStub]);
-
-        store.dispatch(leavesActions.fetchLeaves(1234))
-            .then((resp) => {
-                request.done();
-                let executedActions = store.getActions();
-                expect(executedActions[0].type).to.equal(constants.LEAVE_FETCHING);
-                expect(executedActions[1].type).to.equal(constants.LEAVES_FETCHED);
-                expect(executedActions[1].leaves).to.deep.equal([leaveFormStub]);
-                done();
-            })
-            .catch(done);
-    });
-
-    it("should dispatch correct action when fetchLeaves is called and returned error", (done) => {
-        let error = {error: 'error'};
-        const request = api.get(`/leaves`).reply(500, error);
-
-        store.dispatch(leavesActions.fetchLeaves(1234))
-            .then((resp) => {
-                request.done();
-                let executedActions = store.getActions();
-                expect(executedActions[0].type).to.equal(constants.LEAVE_FETCHING);
-                expect(executedActions[1].type).to.equal(constants.LEAVE_ERROR);
-                expect(executedActions[1].error).to.deep.equal('Unable to retrieve the leaves: 500 (Internal Server Error)');
-                done();
-            })
-            .catch(done);
-    });
-
     it("should dispatch correct action when submitLeave is called", (done) => {
         const request = api.post(`/leaves/`).reply(201, leaveFormStub);
 
