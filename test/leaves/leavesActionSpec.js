@@ -89,4 +89,34 @@ describe("Leaves Action", () => {
             })
             .catch(done);
     });
+
+    it('should dispatch an action to fetch the leaves', (done) => {
+        const request = api.get(`/leaves`).reply(200, [leaveFormStub]);
+
+        store.dispatch(leavesActions.fetchLeaves())
+            .then((resp) => {
+                request.done();
+                let executedActions = store.getActions();
+                expect(executedActions[0].type).to.equal(constants.LEAVE_FETCHING);
+                expect(executedActions[1].type).to.equal(constants.LEAVES_FETCHED);
+                expect(executedActions[1].leaves).to.deep.equal([leaveFormStub]);
+                done();
+            })
+            .catch(done);
+    });
+
+    it('should dispatch an action to fetch the leaves when it returns the error', (done) => {
+        const request = api.get(`/leaves`).reply(500, {error: 'error'});
+
+        store.dispatch(leavesActions.fetchLeaves())
+            .then((resp) => {
+                request.done();
+                let executedActions = store.getActions();
+                expect(executedActions[0].type).to.equal(constants.LEAVE_FETCHING);
+                expect(executedActions[1].type).to.equal(constants.LEAVE_ERROR);
+                expect(executedActions[1].error).to.deep.equal('error occurred');
+                done();
+            })
+            .catch(done);
+    });
 });

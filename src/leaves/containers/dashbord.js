@@ -5,6 +5,9 @@ import Dashboard from '../components/dashboard';
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        fetchLeaves: () => {
+            dispatch(leavesActions.fetchLeaves())
+        },
         navigateToNewLeave: () => {
             dispatch(leavesActions.navigateToNewLeave())
         }
@@ -14,6 +17,7 @@ const mapDispatchToProps = (dispatch) => {
 const mapStateToProps = (state) => {
 
     return {
+        leaves: state.leaves.leaves
     }
 };
 

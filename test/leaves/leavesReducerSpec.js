@@ -34,4 +34,13 @@ describe("Leaves Reducer", () => {
 
         expect(updatedState.error).deep.equal(error);
     });
+
+    it("should return a new state with modified leaves when LEAVES_FETCHED action is received", () => {
+        let leaves = [{dummy: 'dummy'}];
+        const action = {type: constants.LEAVES_FETCHED, leaves: leaves};
+
+        const updatedState = reducer(undefined, action);
+
+        expect(updatedState.leaves).deep.equal(leaves);
+    });
 });

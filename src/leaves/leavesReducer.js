@@ -26,6 +26,12 @@ export default function leaves(state = initialState, action = {}) {
                 status: "SUCCESS",
                 error: null
             });
+        case constants.LEAVES_FETCHED:
+            return Object.assign({}, state, {
+                leaves: action.leaves,
+                status: "SUCCESS",
+                error: null
+            });
         case constants.LEAVE_ERROR:
             return Object.assign({}, state, {
                 error: action.error,

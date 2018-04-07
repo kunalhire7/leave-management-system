@@ -14,6 +14,11 @@ const leaveFetched = (leave) => ({
     leave
 });
 
+const leavesFetched = (leaves) => ({
+    type: constants.LEAVES_FETCHED,
+    leaves
+});
+
 const leaveError = (error) => ({
     type: constants.LEAVE_ERROR,
     error
@@ -64,6 +69,19 @@ const navigateToDashboard = () => {
     }
 };
 
+const fetchLeaves = () => {
+    return (dispatch) => {
+        dispatch(leaveFetching());
+        return http.get(dispatch, `${config.serverUrl}/leaves`, null, {
+            'Accept': APPLICATION_JSON
+        }).then((resp) => {
+            dispatch(leavesFetched(resp));
+        }).catch((err) => {
+            dispatch(leaveError('error occurred'))
+        })
+    }
+};
+
 export const constants = {
     LEAVE_ERROR: "LEAVE_ERROR",
     LEAVE_NEW: "LEAVE_NEW",
@@ -78,5 +96,6 @@ export const leavesActions = {
     fetchLeave,
     submitLeave,
     navigateToNewLeave,
-    navigateToDashboard
+    navigateToDashboard,
+    fetchLeaves
 };
